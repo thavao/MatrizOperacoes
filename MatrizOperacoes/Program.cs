@@ -1,14 +1,14 @@
 ﻿int qtdLinhas = 4, qtdColunas = 4;
-int[,] matriz1 = new int[qtdLinhas, qtdColunas];
-int[,] matriz2 = new int[qtdLinhas, qtdColunas];
-int[,] matrizResultante = new int[qtdLinhas, qtdColunas];
+float[,] matriz1 = new float[qtdLinhas, qtdColunas];
+float[,] matriz2 = new float[qtdLinhas, qtdColunas];
+float[,] matrizResultante = new float[qtdLinhas, qtdColunas];
 int linhaAtual, colunaAtual;
 for (linhaAtual = 0; linhaAtual < qtdLinhas; linhaAtual++)
 {
     for (colunaAtual = 0; colunaAtual < qtdColunas; colunaAtual++)
     {
-        matriz1[linhaAtual, colunaAtual] = new Random().Next(1,50);
-        matriz2[linhaAtual, colunaAtual] = new Random().Next(1,50);
+        matriz1[linhaAtual, colunaAtual] = new Random().Next(1, 50);
+        matriz2[linhaAtual, colunaAtual] = new Random().Next(1, 50);
     }
 }
 
@@ -42,7 +42,7 @@ for (linhaAtual = 0; linhaAtual < qtdLinhas; linhaAtual++)
     Console.WriteLine();
     for (colunaAtual = 0; colunaAtual < qtdColunas; colunaAtual++)
     {
-        matrizResultante[linhaAtual, colunaAtual] = matriz1[linhaAtual, colunaAtual] + matriz2[linhaAtual, colunaAtual]; 
+        matrizResultante[linhaAtual, colunaAtual] = matriz1[linhaAtual, colunaAtual] + matriz2[linhaAtual, colunaAtual];
         Console.Write(matrizResultante[linhaAtual, colunaAtual] + " ");
     }
 }
@@ -81,8 +81,13 @@ for (linhaAtual = 0; linhaAtual < qtdLinhas; linhaAtual++)
     Console.WriteLine();
     for (colunaAtual = 0; colunaAtual < qtdColunas; colunaAtual++)
     {
-        matrizResultante[linhaAtual, colunaAtual] = matriz1[linhaAtual, colunaAtual] / matriz2[linhaAtual, colunaAtual];
-        Console.Write(matrizResultante[linhaAtual, colunaAtual] + " ");
+        if (matriz2[linhaAtual, colunaAtual] != 0)
+            matrizResultante[linhaAtual, colunaAtual] = matriz1[linhaAtual, colunaAtual] / matriz2[linhaAtual, colunaAtual];
+        else
+            matrizResultante[linhaAtual, colunaAtual] = float.NaN;
+
+        Console.Write(matrizResultante[linhaAtual, colunaAtual].ToString("00.00") + " ");
+
     }
 }
 Console.WriteLine();
