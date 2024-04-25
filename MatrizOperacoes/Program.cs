@@ -1,4 +1,4 @@
-﻿int qtdLinhas = 4, qtdColunas = 4;
+﻿int qtdLinhas = 4, qtdColunas = 4, opcao = 0;
 float[,] matriz1 = new float[qtdLinhas, qtdColunas];
 float[,] matriz2 = new float[qtdLinhas, qtdColunas];
 float[,] matrizResultante = new float[qtdLinhas, qtdColunas];
@@ -6,13 +6,15 @@ int linhaAtual, colunaAtual;
 
 void EscolherOperacao()
 {
-    int opcao;
-
+    Console.WriteLine();
     Console.WriteLine("[1] - Somar | [2] - Subtrair | [3] - Multiplicação | [4] - Divisão | [0] - Sair");
     opcao = int.Parse(Console.ReadLine());
 
     switch (opcao)
     {
+        case 0:
+            Console.WriteLine("Saindo...");
+            break;
         case 1:
             SomarMatriz();
             break;
@@ -25,6 +27,12 @@ void EscolherOperacao()
         case 4:
             DividirMatriz();
             break;
+        default:
+            Console.WriteLine("Opção invalida, tente novamente.");
+            Console.WriteLine("Pressione Enter para continuar...");
+            Console.ReadLine();
+            break;
+
     }
 }
 
@@ -36,7 +44,7 @@ void ImprimirMatriz(float[,] matriz, string titulo)
         Console.WriteLine();
         for (colunaAtual = 0; colunaAtual < qtdColunas; colunaAtual++)
         {
-            Console.Write(matriz[linhaAtual, colunaAtual] + " ");
+            Console.Write($"{matrizResultante[linhaAtual, colunaAtual]: 0.00} ");
         }
     }
 }
@@ -45,7 +53,6 @@ void SomarMatriz()
 {
     for (linhaAtual = 0; linhaAtual < qtdLinhas; linhaAtual++)
     {
-        Console.WriteLine();
         for (colunaAtual = 0; colunaAtual < qtdColunas; colunaAtual++)
         {
             matrizResultante[linhaAtual, colunaAtual] = matriz1[linhaAtual, colunaAtual] + matriz2[linhaAtual, colunaAtual];
@@ -58,7 +65,6 @@ void SubtrairMatriz()
 {
     for (linhaAtual = 0; linhaAtual < qtdLinhas; linhaAtual++)
     {
-        Console.WriteLine();
         for (colunaAtual = 0; colunaAtual < qtdColunas; colunaAtual++)
         {
             matrizResultante[linhaAtual, colunaAtual] = matriz1[linhaAtual, colunaAtual] - matriz2[linhaAtual, colunaAtual];
@@ -71,11 +77,9 @@ void MultiplicarMatriz()
 {
     for (linhaAtual = 0; linhaAtual < qtdLinhas; linhaAtual++)
     {
-        Console.WriteLine();
         for (colunaAtual = 0; colunaAtual < qtdColunas; colunaAtual++)
         {
             matrizResultante[linhaAtual, colunaAtual] = matriz1[linhaAtual, colunaAtual] * matriz2[linhaAtual, colunaAtual];
-            Console.Write(matrizResultante[linhaAtual, colunaAtual] + " ");
         }
     }
     ImprimirMatriz(matrizResultante, "Multiplicação da matriz: ");
@@ -85,16 +89,12 @@ void DividirMatriz()
 {
     for (linhaAtual = 0; linhaAtual < qtdLinhas; linhaAtual++)
     {
-        Console.WriteLine();
         for (colunaAtual = 0; colunaAtual < qtdColunas; colunaAtual++)
         {
             if (matriz2[linhaAtual, colunaAtual] != 0)
                 matrizResultante[linhaAtual, colunaAtual] = matriz1[linhaAtual, colunaAtual] / matriz2[linhaAtual, colunaAtual];
             else
                 matrizResultante[linhaAtual, colunaAtual] = float.NaN;
-
-            Console.Write(matrizResultante[linhaAtual, colunaAtual].ToString("00.00") + " ");
-
         }
     }
     ImprimirMatriz(matrizResultante, "Divisão da matriz");
@@ -132,4 +132,7 @@ for (linhaAtual = 0; linhaAtual < qtdLinhas; linhaAtual++)
 }
 
 Console.WriteLine();
-EscolherOperacao();
+do
+{
+    EscolherOperacao();
+} while (opcao != 0);
