@@ -1,7 +1,5 @@
 ﻿int qtdLinhas = 4, qtdColunas = 4, opcao = 0;
-float[,] matriz1 = new float[qtdLinhas, qtdColunas];
-float[,] matriz2 = new float[qtdLinhas, qtdColunas];
-float[,] matrizResultante = new float[qtdLinhas, qtdColunas];
+
 int linhaAtual, colunaAtual;
 int minimo = 1, maximo = 50;
 
@@ -13,6 +11,12 @@ void DefinirTamanhoDaMatriz()
     Console.Write("Digite a quantidade de colunas: ");
     qtdColunas = int.Parse(Console.ReadLine());
 }
+
+DefinirTamanhoDaMatriz();
+float[,] matriz1 = new float[qtdLinhas, qtdColunas];
+float[,] matriz2 = new float[qtdLinhas, qtdColunas];
+float[,] matrizResultante = new float[qtdLinhas, qtdColunas];
+
 void SortearMatriz()
 {
     for (linhaAtual = 0; linhaAtual < qtdLinhas; linhaAtual++)
@@ -127,7 +131,6 @@ void DividirMatriz()
 
 Console.WriteLine();
 
-DefinirTamanhoDaMatriz();
 
 SortearMatriz();
 ImprimirMatriz(matriz1, "Matriz 1");
