@@ -1,7 +1,5 @@
 ﻿int qtdLinhas = 4, qtdColunas = 4, opcao = 0;
-float[,] matriz1 = new float[qtdLinhas, qtdColunas];
-float[,] matriz2 = new float[qtdLinhas, qtdColunas];
-float[,] matrizResultante = new float[qtdLinhas, qtdColunas];
+
 int linhaAtual, colunaAtual;
 int minimo = 1, maximo = 50;
 
@@ -13,6 +11,12 @@ void DefinirTamanhoDaMatriz()
     Console.Write("Digite a quantidade de colunas: ");
     qtdColunas = int.Parse(Console.ReadLine());
 }
+
+DefinirTamanhoDaMatriz();
+float[,] matriz1 = new float[qtdLinhas, qtdColunas];
+float[,] matriz2 = new float[qtdLinhas, qtdColunas];
+float[,] matrizResultante = new float[qtdLinhas, qtdColunas];
+
 void SortearMatriz()
 {
     for (linhaAtual = 0; linhaAtual < qtdLinhas; linhaAtual++)
@@ -24,38 +28,12 @@ void SortearMatriz()
         }
     }
 }
-void EscolherOperacao()
+int EscolherOperacao()
 {
     Console.WriteLine();
     Console.WriteLine();
     Console.WriteLine("[1] - Somar | [2] - Subtrair | [3] - Multiplicar | [4] - Dividir | [0] - Sair");
-    opcao = int.Parse(Console.ReadLine());
-
-    switch (opcao)
-    {
-        case 0:
-            Console.WriteLine("Saindo...");
-            Console.WriteLine("Pressione Enter para encerrar...");
-            Console.ReadLine();
-            break;
-        case 1:
-            SomarMatriz();
-            break;
-        case 2:
-            SubtrairMatriz();
-            break;
-        case 3:
-            MultiplicarMatriz();
-            break;
-        case 4:
-            DividirMatriz();
-            break;
-        default:
-            Console.WriteLine("Opção invalida, tente novamente.");
-            Console.WriteLine("Pressione Enter para continuar...");
-            Console.ReadLine();
-            break;
-    }
+    return opcao = int.Parse(Console.ReadLine());
 }
 
 void ImprimirMatriz(float[,] matriz, string titulo)
@@ -127,13 +105,36 @@ void DividirMatriz()
 
 Console.WriteLine();
 
-DefinirTamanhoDaMatriz();
-
 SortearMatriz();
 ImprimirMatriz(matriz1, "Matriz 1");
 ImprimirMatriz(matriz2, "Matriz 2");
 
 do
 {
-    EscolherOperacao();
+    switch (EscolherOperacao())
+    {
+        case 0:
+            Console.WriteLine("Saindo...");
+            Console.WriteLine("Pressione Enter para encerrar...");
+            Console.ReadLine();
+            break;
+        case 1:
+            SomarMatriz();
+            break;
+        case 2:
+            SubtrairMatriz();
+            break;
+        case 3:
+            MultiplicarMatriz();
+            break;
+        case 4:
+            DividirMatriz();
+            break;
+        default:
+            Console.WriteLine("Opção invalida, tente novamente.");
+            Console.WriteLine("Pressione Enter para continuar...");
+            Console.ReadLine();
+            break;
+    }
+
 } while (opcao != 0);
